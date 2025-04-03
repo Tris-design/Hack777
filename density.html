@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>Нягтын Тооцоологч</title>
+    <style>
+        body {
+            background-color: #0a2a5e;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: #10356b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            background: #162e52;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Буцах</a>
+    </div>
+    <div class="container">
+        <div class="title">Нягтын Тооцоологч</div>
+        <p>Массыг ба эзлэхүүнийг оруулж, нягт тооцоолно уу.</p>
+        <input type="number" id="mass" placeholder="Массын хэмжээ (кг)">
+        <input type="number" id="volume" placeholder="Эзлэхүүн (м³)">
+        <button onclick="calculateDensity()">Тооцоолох</button>
+        <div class="output" id="result"></div>
+    </div>
+    <script>
+        function calculateDensity() {
+            let mass = parseFloat(document.getElementById('mass').value);
+            let volume = parseFloat(document.getElementById('volume').value);
+            
+            if (!isNaN(mass) && !isNaN(volume) && volume !== 0) {
+                let density = mass / volume;
+                document.getElementById('result').innerText = `Нягт: ${density.toFixed(2)} кг/м³`;
+            } else {
+                document.getElementById('result').innerText = 'Та зөв утгуудыг оруулна уу. Эзлэхүүн 0 байж болохгүй!';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>Атомын Бүтэц Тодорхойлогч</title>
+    <style>
+        body {
+            background-color: #0a2a5e;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: #10356b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            background: #162e52;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Буцах</a>
+    </div>
+    <div class="container">
+        <h1>Атомын Бүтэц Тодорхойлогч</h1>
+        <p>Элементийн атомын дугаарыг оруулна уу.</p>
+        <input type="number" id="atomicNumber" placeholder="Атомын дугаар (жишээ: 8)">
+        <button onclick="calculateAtomicStructure()">Тооцоолох</button>
+        <div class="output" id="result"></div>
+    </div>
+    <script>
+        function calculateAtomicStructure() {
+            let atomicNumber = parseInt(document.getElementById('atomicNumber').value);
+            if (isNaN(atomicNumber) || atomicNumber < 1 || atomicNumber > 118) {
+                document.getElementById('result').innerText = "⚠️ Атомын дугаарыг зөв оруулна уу (1-118 хооронд)!";
+                return;
+            }
+
+            // Нейтроны тоог ойролцоогоор тооцоолох
+            let neutronCount = Math.round(atomicNumber * 1.1);
+            let electronConfig = getElectronConfiguration(atomicNumber);
+
+            let resultText = `⚛️ **Элементийн Атомын Бүтэц**:
+            🔹 **Протон**: ${atomicNumber}
+            🔹 **Нейтрон**: ${neutronCount}
+            🔹 **Электрон**: ${atomicNumber}
+            🔹 **Электрон давхарга**: ${electronConfig}`;
+
+            document.getElementById('result').innerText = resultText;
+        }
+
+        function getElectronConfiguration(atomicNumber) {
+            let shells = [2, 8, 18, 32, 32, 18, 8]; 
+            let config = [];
+            let remainingElectrons = atomicNumber;
+
+            for (let i = 0; i < shells.length; i++) {
+                if (remainingElectrons > shells[i]) {
+                    config.push(shells[i]);
+                    remainingElectrons -= shells[i];
+                } else {
+                    config.push(remainingElectrons);
+                    break;
+                }
+            }
+
+            return config.join("-");
+        }
+    </script>
+</body>
+</html>

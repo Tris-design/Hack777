@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>Эзлэхүүн Тооцоологч</title>
+    <style>
+        body {
+            background-color: #0a2a5e;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: #10356b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            background: #162e52;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Буцах</a>
+    </div>
+    <div class="container">
+        <h1>Эзлэхүүн Тооцоологч</h1>
+        <p>Масс ба нягт оруулж, эзлэхүүнийг тооцоолно уу.</p>
+        <input type="number" id="mass" placeholder="Масс (кг)">
+        <input type="number" id="density" placeholder="Нягт (кг/м³)">
+        <button onclick="calculateVolume()">Тооцоолох</button>
+        <div class="output" id="result"></div>
+    </div>
+    <script>
+        function calculateVolume() {
+            let mass = parseFloat(document.getElementById('mass').value);
+            let density = parseFloat(document.getElementById('density').value);
+            if (!isNaN(mass) && !isNaN(density) && density !== 0) {
+                let volume = mass / density;
+                document.getElementById('result').innerText = `Эзлэхүүн: ${volume.toFixed(2)} м³`;
+            } else {
+                document.getElementById('result').innerText = 'Зөв утга оруулна уу!';
+            }
+        }
+    </script>
+</body>
+</html>

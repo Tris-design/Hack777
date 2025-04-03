@@ -1,0 +1,103 @@
+<html>
+<head>
+    <title>Бодисын Төлөв Тодорхойлогч</title>
+    <style>
+        body {
+            background-color: #0a2a5e;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: #10356b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            background: #162e52;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Буцах</a>
+    </div>
+    <div class="container">
+        <h1>Бодисын Төлөв Тодорхойлогч</h1>
+        <p>Бодисын нэр болон температурыг оруулна уу.</p>
+        <input type="text" id="substance" placeholder="Бодисын нэр (жишээ: ус)">
+        <input type="number" id="temperature" placeholder="Температур (°C)">
+        <button onclick="determineState()">Тооцоолох</button>
+        <div class="output" id="result"></div>
+    </div>
+    <script>
+        function determineState() {
+            let substance = document.getElementById('substance').value.toLowerCase().trim();
+            let temperature = parseFloat(document.getElementById('temperature').value);
+            let resultText = "";
+
+            if (!substance || isNaN(temperature)) {
+                resultText = "⚠️ Бодисын нэр болон температурыг зөв оруулна уу!";
+            } else {
+                resultText = getStateOfMatter(substance, temperature);
+            }
+
+            document.getElementById('result').innerText = resultText;
+        }
+
+        function getStateOfMatter(substance, temperature) {
+            const substances = {
+                "ус": { freeze: 0, boil: 100 },
+                "төмөр": { freeze: 1538, boil: 2862 },
+                "мөнгөн ус": { freeze: -39, boil: 357 },
+                "азот": { freeze: -210, boil: -196 },
+                "хүчилтөрөгч": { freeze: -218, boil: -183 },
+                "алт": { freeze: 1064, boil: 2856 }
+            };
+
+            if (!substances[substance]) {
+                return "⚠️ Энэ бодисын мэдээлэл алга!";
+            }
+
+            let { freeze, boil } = substances[substance];
+
+            if (temperature < freeze) {
+                return `❄️ ${substance} нь **хатуу** төлөвт байна.`;
+            } else if (temperature > boil) {
+                return `💨 ${substance} нь **хий** төлөвт байна.`;
+            } else {
+                return `💧 ${substance} нь **шингэн** төлөвт байна.`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Алгебра Тооцоологч</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #0a2a5e;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: #10356b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        input, button, select {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            background: #162e52;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Буцах</a>
+    </div>
+    <div class="container">
+        <div class="title">Алгебра Тооцоологч</div>
+        <p>Функц оруулж, алгебрагийн үйлдлийг сонгоно уу.</p>
+        <input type="text" id="expression" placeholder="Функц оруулна уу (жишээ: x^2 + 3x)">
+        <select id="operation">
+            <option value="simplify">Багаар илэрхийлэх</option>
+            <option value="solve">Тэгшитгэл шийдэх</option>
+        </select>
+        <button onclick="calculate()">Тооцоолох</button>
+        <div class="output" id="result"></div>
+    </div>
+    <!-- External JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

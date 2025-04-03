@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>Ерөнхий Харьцангуйн Тооцоологч</title>
+    <style>
+        body {
+            background-color: #0a2a5e;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: #10356b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        input, button, select {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px;
+            background: #162e52;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Буцах</a>
+    </div>
+    <div class="container">
+        <h1>Ерөнхий Харьцангуйн Тооцоологч</h1>
+        <p>Тооцоолох үзүүлэлтийг сонгоно уу.</p>
+        <select id="operation">
+            <option value="schwarzschild">Хар нүхний радиус</option>
+            <option value="time_dilation">Цаг хугацааны суналт</option>
+        </select>
+        <input type="number" id="mass" placeholder="Масс (kg)">
+        <button onclick="calculate()">Тооцоолох</button>
+        <div class="output" id="result"></div>
+    </div>
+    <script>
+        function calculate() {
+            const G = 6.67430e-11; // Гравитацийн тогтмол (м³⋅кг⁻¹⋅с⁻²)
+            const c = 299792458; // Гэрлийн хурд (м/с)
+            let mass = parseFloat(document.getElementById('mass').value);
+            let operation = document.getElementById('operation').value;
+            let resultText = "";
+
+            if (isNaN(mass) || mass <= 0) {
+                resultText = "Зөв масс оруулна уу!";
+            } else {
+                if (operation === "schwarzschild") {
+                    let rs = (2 * G * mass) / (c * c);
+                    resultText = `Хар нүхний эвентийн радиус: ${rs.toExponential(2)} м`;
+                } else if (operation === "time_dilation") {
+                    let rs = (2 * G * mass) / (c * c);
+                    let timeFactor = Math.sqrt(1 - rs / mass);
+                    resultText = `Цаг хугацааны суналтын коэффициент: ${timeFactor.toFixed(5)}`;
+                }
+            }
+
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+</body>
+</html>
